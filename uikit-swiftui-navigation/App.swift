@@ -7,22 +7,14 @@
 
 import SwiftUI
 
-class ViewControllerHolder {
-    weak var viewController: UIViewController?
-    init() {
-
-    }
-}
-
-protocol ViewScreen: View {
-    // display
-}
-
 @main
 struct AppRoot: App {
+    @StateObject private var router = AppRouter()
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(router)
         }
     }
 }

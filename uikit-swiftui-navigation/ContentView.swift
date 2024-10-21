@@ -8,17 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject private var router: AppRouter
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        if router.isAuthFlow {
+            AuthScreen()
+                .navigationStack(path: $router.authFlow)
+                .transition(.push(from: .trailing))
+        } else {
+            MainScreen()
+                .navigationStack(path: $router.mainFlow)
+                .transition(.push(from: .leading))
         }
-        .padding()
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(AppRouter())
 }
