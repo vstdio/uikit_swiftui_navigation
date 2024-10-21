@@ -9,8 +9,8 @@ import SwiftUI
 
 final class AppRouter: ObservableObject {
     @Published private(set) var isAuthFlow: Bool = true
-    @Published var authFlow: [String] = []
-    @Published var mainFlow: [String] = []
+    @Published var authFlow: [AppRouterDestination] = []
+    @Published var mainFlow: [AppRouterDestination] = []
 
     func setIsAuthFlow(_ value: Bool) {
         withAnimation {
@@ -26,20 +26,23 @@ final class AppRouter: ObservableObject {
         }
     }
 
-    func push(screen: String) {
+    func push(destination: AppRouterDestination) {
         if isAuthFlow {
-            authFlow.append(screen)
+            authFlow.append(destination)
         } else {
-            mainFlow.append(screen)
+            mainFlow.append(destination)
         }
     }
 
+    func push(path: AppRouterPath) {
+        push(destination: AppRouterDestination(path: path))
+    }
+
     @ViewBuilder
-    func screen(for path: String) -> some View {
-        switch path {
-        case "Register": RegisterScreen()
-        case "ProfileDetails": ProfileDetailsScreen()
-        default: EmptyView()
+    func screen(for destination: AppRouterDestination) -> some View {
+        switch destination.path {
+        case .register: RegisterScreen()
+        case .profileDetails: ProfileDetailsScreen()
         }
     }
 }

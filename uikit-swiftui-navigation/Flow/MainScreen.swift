@@ -15,7 +15,7 @@ struct MainScreen: View {
         VStack(spacing: 10) {
             Text("Greetings, \(username)!")
             Button {
-                router.push(screen: "ProfileDetails")
+                router.push(path: .profileDetails)
             } label: {
                 Text("Details")
             }

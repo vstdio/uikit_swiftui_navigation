@@ -24,7 +24,7 @@ struct AuthScreen: View {
                 Text("Authenticate")
             }
             Button {
-                router.push(screen: "Register")
+                router.push(path: .register)
             } label: {
                 Text("Register")
             }

@@ -9,20 +9,20 @@ import SwiftUI
 
 struct NavigationStackModifier: ViewModifier {
     @EnvironmentObject private var router: AppRouter
-    @Binding var navigationPath: [String]
+    @Binding var navigationPath: [AppRouterDestination]
 
     func body(content: Content) -> some View {
         NavigationStack(path: $navigationPath) {
             content
-                .navigationDestination(for: String.self) { path in
-                    router.screen(for: path)
+                .navigationDestination(for: AppRouterDestination.self) { destination in
+                    router.screen(for: destination)
                 }
         }
     }
 }
 
 extension View {
-    func navigationStack(path: Binding<[String]>) -> some View {
+    func navigationStack(path: Binding<[AppRouterDestination]>) -> some View {
         return modifier(NavigationStackModifier(navigationPath: path))
     }
 }
