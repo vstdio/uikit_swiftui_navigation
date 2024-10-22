@@ -21,8 +21,8 @@ final class AppRouter: ObservableObject {
 
     func clearFlows() {
         DispatchQueue.main.async { [weak self] in
-            self?.authFlow = []
-            self?.mainFlow = []
+            self?.authFlow.removeAll(keepingCapacity: true)
+            self?.mainFlow.removeAll(keepingCapacity: true)
         }
     }
 
