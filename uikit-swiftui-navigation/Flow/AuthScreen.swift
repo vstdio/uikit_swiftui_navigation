@@ -9,6 +9,8 @@ import SwiftUI
 
 struct AuthScreen: View {
     @EnvironmentObject private var router: AppRouter
+    weak var routerUIKit: AppRouterUIKit?
+
     @State private var login: String = ""
     @State private var password: String = ""
 
@@ -19,12 +21,20 @@ struct AuthScreen: View {
             TextField("Password", text: $password)
                 .textFieldStyle(.roundedBorder)
             Button {
-                router.setIsAuthFlow(false)
+                if let routerUIKit {
+                    routerUIKit.setIsAuthFlow(false)
+                } else {
+                    router.setIsAuthFlow(false)
+                }
             } label: {
                 Text("Authenticate")
             }
             Button {
-                router.push(path: .register)
+                if let routerUIKit {
+                    routerUIKit.pushRegisterScreen()
+                } else {
+                    router.push(path: .register)
+                }
             } label: {
                 Text("Register")
             }

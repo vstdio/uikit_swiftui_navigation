@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProfileDetailsScreen: View {
     @EnvironmentObject private var router: AppRouter
+    weak var routerUIKit: AppRouterUIKit?
 
     var body: some View {
         VStack {

@@ -10,11 +10,16 @@ import SwiftUI
 @main
 struct AppRoot: App {
     @StateObject private var router = AppRouter()
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(router)
+            if SceneDelegate.useUIKitNavigation {
+                EmptyView()
+            } else {
+                ContentView()
+                    .environmentObject(router)
+            }
         }
     }
 }

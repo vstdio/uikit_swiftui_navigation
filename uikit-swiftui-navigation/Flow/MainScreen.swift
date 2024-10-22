@@ -9,18 +9,28 @@ import SwiftUI
 
 struct MainScreen: View {
     @EnvironmentObject private var router: AppRouter
+    weak var routerUIKit: AppRouterUIKit?
+
     @State private var username = "John"
 
     var body: some View {
         VStack(spacing: 10) {
             Text("Greetings, \(username)!")
             Button {
-                router.push(path: .profileDetails)
+                if let routerUIKit {
+                    routerUIKit.pushProfileDetailsScreen()
+                } else {
+                    router.push(path: .profileDetails)
+                }
             } label: {
                 Text("Details")
             }
             Button {
-                router.setIsAuthFlow(true)
+                if let routerUIKit {
+                    routerUIKit.setIsAuthFlow(true)
+                } else {
+                    router.setIsAuthFlow(true)
+                }
             } label: {
                 Text("Logout")
             }

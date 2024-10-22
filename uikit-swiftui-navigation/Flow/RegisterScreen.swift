@@ -9,6 +9,8 @@ import SwiftUI
 
 struct RegisterScreen: View {
     @EnvironmentObject private var router: AppRouter
+    weak var routerUIKit: AppRouterUIKit?
+
     @State private var login: String = ""
     @State private var password: String = ""
     @State private var confirm: String = ""
@@ -22,7 +24,11 @@ struct RegisterScreen: View {
             TextField("Confirm Password", text: $confirm)
                 .textFieldStyle(.roundedBorder)
             Button {
-                router.setIsAuthFlow(false)
+                if let routerUIKit {
+                    routerUIKit.setIsAuthFlow(false)
+                } else {
+                    router.setIsAuthFlow(false)
+                }
             } label: {
                 Text("Register")
             }
