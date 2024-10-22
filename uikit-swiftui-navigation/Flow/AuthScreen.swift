@@ -40,6 +40,7 @@ struct AuthScreen: View {
             }
         }
         .padding(.horizontal, 50)
+        .navigationTitle("Auth")
     }
 }
 

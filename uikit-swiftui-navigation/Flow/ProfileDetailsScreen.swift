@@ -15,6 +15,7 @@ struct ProfileDetailsScreen: View {
         VStack {
             Text("Profile Details")
         }
+        .navigationTitle("Profile")
     }
 }
 

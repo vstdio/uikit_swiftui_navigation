@@ -14,6 +14,7 @@ final class AppRouterUIKit {
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         navigationController.setNavigationBarHidden(false, animated: false)
+        navigationController.navigationBar.prefersLargeTitles = true
         pushAuthScreen()
     }
 
@@ -21,32 +22,32 @@ final class AppRouterUIKit {
         var screen = MainScreen()
         screen.routerUIKit = self
         let controller = UIHostingController(rootView: screen)
+        controller.title = "Home"
         navigationController.setViewControllers([controller], animated: true)
-        navigationController.title = "Home"
     }
 
     func pushAuthScreen() {
         var screen = AuthScreen()
         screen.routerUIKit = self
         let controller = UIHostingController(rootView: screen)
+        controller.title = "Auth"
         navigationController.pushViewController(controller, animated: true)
-        navigationController.title = "Auth"
     }
 
     func pushRegisterScreen() {
         var screen = RegisterScreen()
         screen.routerUIKit = self
         let controller = UIHostingController(rootView: screen)
+        controller.title = "Register"
         navigationController.pushViewController(controller, animated: true)
-        navigationController.title = "Register"
     }
 
     func pushProfileDetailsScreen() {
         var screen = ProfileDetailsScreen()
         screen.routerUIKit = self
         let controller = UIHostingController(rootView: screen)
+        controller.title = "Profile"
         navigationController.pushViewController(controller, animated: true)
-        navigationController.title = "Profile"
     }
 
     func setIsAuthFlow(_ value: Bool) {
@@ -54,11 +55,15 @@ final class AppRouterUIKit {
         if value {
             var screen = AuthScreen()
             screen.routerUIKit = self
-            controllers.append(UIHostingController(rootView: screen))
+            let controller = UIHostingController(rootView: screen)
+            controller.title = "Auth"
+            controllers.append(controller)
         } else {
             var screen = MainScreen()
             screen.routerUIKit = self
-            controllers.append(UIHostingController(rootView: screen))
+            let controller = UIHostingController(rootView: screen)
+            controller.title = "Home"
+            controllers.append(controller)
         }
         navigationController.setViewControllers(controllers, animated: true)
     }

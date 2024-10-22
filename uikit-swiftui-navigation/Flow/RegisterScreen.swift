@@ -34,6 +34,7 @@ struct RegisterScreen: View {
             }
         }
         .padding(.horizontal, 50)
+        .navigationTitle("Register")
     }
 }
 

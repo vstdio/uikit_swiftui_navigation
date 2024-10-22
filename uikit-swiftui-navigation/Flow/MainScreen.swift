@@ -35,6 +35,7 @@ struct MainScreen: View {
                 Text("Logout")
             }
         }
+        .navigationTitle("Home")
     }
 }
 
